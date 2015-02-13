@@ -14,6 +14,7 @@
 		F75D93FE1A8D5416002F809E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F75D93FD1A8D5416002F809E /* Images.xcassets */; };
 		F75D94011A8D5416002F809E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F75D93FF1A8D5416002F809E /* LaunchScreen.xib */; };
 		F75D940D1A8D5417002F809E /* MessageHubClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D940C1A8D5417002F809E /* MessageHubClientTests.swift */; };
+		F75D94491A8E833A002F809E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D94481A8E833A002F809E /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		F75D94061A8D5417002F809E /* MessageHubClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessageHubClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75D940B1A8D5417002F809E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F75D940C1A8D5417002F809E /* MessageHubClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHubClientTests.swift; sourceTree = "<group>"; };
+		F75D94481A8E833A002F809E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				F75D93F41A8D5416002F809E /* AppDelegate.swift */,
+				F75D94481A8E833A002F809E /* Message.swift */,
 				F75D93F61A8D5416002F809E /* MasterViewController.swift */,
 				F75D93F81A8D5416002F809E /* DetailViewController.swift */,
 				F75D93FA1A8D5416002F809E /* Main.storyboard */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F75D93F91A8D5416002F809E /* DetailViewController.swift in Sources */,
+				F75D94491A8E833A002F809E /* Message.swift in Sources */,
 				F75D93F71A8D5416002F809E /* MasterViewController.swift in Sources */,
 				F75D93F51A8D5416002F809E /* AppDelegate.swift in Sources */,
 			);
