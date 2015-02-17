@@ -12,7 +12,7 @@ class DetailViewController: UITableViewController {
 
     var messages = [
         Message(text: "hellohellohello", userName: "Troy"),
-        Message(text: "heyooo", userName: "Wen")
+        Message(text: "heyooo", userName: "John")
     ]
     
     override func viewDidLoad() {
