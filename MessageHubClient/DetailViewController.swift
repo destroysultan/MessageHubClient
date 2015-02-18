@@ -33,7 +33,7 @@ class DetailViewController: UITableViewController {
         
         let message = self.messages[indexPath.row]
         cell.textLabel!.numberOfLines = 0
-        cell.textLabel!.text = "<\(message.userName)> \(message.text)"
+        cell.textLabel!.text = "\(message.userName): \(message.text)"
         return cell
     }   
     

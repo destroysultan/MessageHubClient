@@ -80,7 +80,7 @@
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Add new topic" id="qvW-bU-LAg">
+                                    <navigationItem title="Create channel" id="qvW-bU-LAg">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="oij-ds-aCa">
                                             <connections>
                                                 <action selector="submitChannelName:" destination="JOp-En-A6K" id="ohK-pA-24b"/>
@@ -89,7 +89,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What do you want to chat about?" id="lB5-xz-GUc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lB5-xz-GUc">
                                 <rect key="frame" x="0.0" y="66" width="320" height="502"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.98825060660417174" green="1" blue="0.99596617156513545" alpha="1" colorSpace="calibratedRGB"/>

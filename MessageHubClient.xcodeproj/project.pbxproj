@@ -15,6 +15,7 @@
 		F75D94011A8D5416002F809E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F75D93FF1A8D5416002F809E /* LaunchScreen.xib */; };
 		F75D940D1A8D5417002F809E /* MessageHubClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D940C1A8D5417002F809E /* MessageHubClientTests.swift */; };
 		F75D94491A8E833A002F809E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D94481A8E833A002F809E /* Message.swift */; };
+		F76B76251A941E1D000887F4 /* LGSimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76B76241A941E1D000887F4 /* LGSimpleChat.swift */; };
 		F78756BE1A92F1EF009B1F87 /* AddChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78756BD1A92F1EF009B1F87 /* AddChannelViewController.swift */; };
 		F78756C21A93CDB7009B1F87 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78756C11A93CDB7009B1F87 /* Channel.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		F75D940B1A8D5417002F809E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F75D940C1A8D5417002F809E /* MessageHubClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHubClientTests.swift; sourceTree = "<group>"; };
 		F75D94481A8E833A002F809E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F76B76241A941E1D000887F4 /* LGSimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSimpleChat.swift; sourceTree = "<group>"; };
 		F78756BD1A92F1EF009B1F87 /* AddChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddChannelViewController.swift; sourceTree = "<group>"; };
 		F78756C11A93CDB7009B1F87 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 		F75D93F11A8D5416002F809E /* MessageHubClient */ = {
 			isa = PBXGroup;
 			children = (
+				F76B76241A941E1D000887F4 /* LGSimpleChat.swift */,
 				F75D93F41A8D5416002F809E /* AppDelegate.swift */,
 				F75D94481A8E833A002F809E /* Message.swift */,
 				F78756C11A93CDB7009B1F87 /* Channel.swift */,
@@ -230,6 +233,7 @@
 				F75D93F71A8D5416002F809E /* MasterViewController.swift in Sources */,
 				F75D93F51A8D5416002F809E /* AppDelegate.swift in Sources */,
 				F78756BE1A92F1EF009B1F87 /* AddChannelViewController.swift in Sources */,
+				F76B76251A941E1D000887F4 /* LGSimpleChat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

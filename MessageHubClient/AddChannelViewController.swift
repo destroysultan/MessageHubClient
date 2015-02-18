@@ -8,18 +8,29 @@
 
 import UIKit
 
-class AddChannelViewController: UIViewController {
+class AddChannelViewController: UIViewController, UITextViewDelegate {
    
     var delegate: AddChannelViewControllerDelegate?
 
     @IBOutlet weak var channelNameTextView: UITextView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        self.channelNameTextView.becomeFirstResponder()
+    var placeholderLabel : UILabel!
     
+    override func viewDidLoad() {
+        self.channelNameTextView.becomeFirstResponder()
+        channelNameTextView.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Add new chat topic"
+        placeholderLabel.font = UIFont.italicSystemFontOfSize(channelNameTextView.font.pointSize)
+        placeholderLabel.sizeToFit()
+        channelNameTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPointMake(5, channelNameTextView.font.pointSize / 2)
+        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderLabel.hidden = countElements(channelNameTextView.text) != 0
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        placeholderLabel.hidden = countElements(textView.text) != 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +42,6 @@ class AddChannelViewController: UIViewController {
         let channel = Channel(name: channelNameTextView.text)
         self.delegate?.addChannelViewControllerDidCreateChannel(channel)
     }
-    
     
     
 
