@@ -9,13 +9,17 @@
 import UIKit
 
 class AddChannelViewController: UIViewController {
-    
+   
     var delegate: AddChannelViewControllerDelegate?
 
+    @IBOutlet weak var channelNameTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+        self.channelNameTextView.becomeFirstResponder()
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +28,7 @@ class AddChannelViewController: UIViewController {
     }
     
     @IBAction func submitChannelName(sender: AnyObject) {
-        let channel = Channel(name: "First Channel")
+        let channel = Channel(name: channelNameTextView.text)
         self.delegate?.addChannelViewControllerDidCreateChannel(channel)
     }
     
