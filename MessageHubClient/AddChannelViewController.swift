@@ -39,7 +39,7 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func submitChannelName(sender: AnyObject) {
-        let channel = Channel(name: channelNameTextView.text)
+        let channel = Channel(channelName: channelNameTextView.text)
         self.delegate?.addChannelViewControllerDidCreateChannel(channel)
     }
     

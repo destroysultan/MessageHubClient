@@ -11,6 +11,7 @@ import UIKit
 class MasterViewController: UITableViewController, AddChannelViewControllerDelegate {
 
     var objects = [] as Array<Channel>
+    var channels = [Channel(channelName: "Eng-track"), Channel(channelName: "Test-channel")]
 
 
     override func awakeFromNib() {
@@ -20,6 +21,7 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        getChannels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,36 +53,82 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return channels.count
     }
-
+    
+//    // add channels created on phone tableView
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return objects.count
+//    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 
-        let channel = objects[indexPath.row] as Channel
-        cell.textLabel!.text = channel.name
+        let channel = channels[indexPath.row] as Channel
+        cell.textLabel!.text = channel.channelName
         return cell
     }
-
-//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        // Return false if you do not want the specified item to be editable.
-//        return true
-//    }
-
-    
-    // MARK: - AddChannelViewControllerDelegate
-    
-//    func insertNewObject(sender: AnyObject) {
-//        objects.insertObject(NSDate(), atIndex: 0)
-//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//    }
     
     func addChannelViewControllerDidCreateChannel(channel: Channel) {
         objects.append(channel)
         tableView.reloadData()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
+    
+    // MARK: - Networking code
+    
+    func alertWithError(error : NSError) {
+        let alertController = UIAlertController(
+            title: "Error",
+            message: error.description,
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func channelsFromNetworkResponseData(responseData : NSData) -> Array<Channel>? {
+        var serializationError : NSError?
+        let channelAPIDictionaries = NSJSONSerialization.JSONObjectWithData(
+            responseData,
+            options: nil,
+            error: &serializationError
+            ) as Array<Dictionary<String, String>>
+        
+        if let serializationError = serializationError {
+            alertWithError(serializationError)
+            return nil
+        }
+        
+        var channels = channelAPIDictionaries.map({ (channelAPIDictionary) -> Channel in
+            let channelToken = channelAPIDictionary["channel_token"]!
+            return Channel(channelName: channelToken)
+        })
+        
+        return channels
+    }
+    
+    // GET channels
+    
+    func getChannels() {
+        let session = NSURLSession.sharedSession()
+        
+        let request = NSMutableURLRequest()
+        request.HTTPMethod = "GET"
+        request.URL = NSURL(string: "http://tradecraftmessagehub.com/sample/")
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+                if let error = error {
+                    self.alertWithError(error)
+                } else if let channels = self.channelsFromNetworkResponseData(data) {
+                    self.channels = channels
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        
+        task.resume()
+    }
 }
 

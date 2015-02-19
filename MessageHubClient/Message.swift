@@ -8,11 +8,11 @@
 
 import UIKit
 
-class Message: NSObject {
+class Message : NSObject {
     let text : String
     let userName : String
     
-    init(text : String, userName: String){
+    init(text: String, userName: String){
         self.text = text
         self.userName = userName
     }

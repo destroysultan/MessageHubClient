@@ -9,9 +9,9 @@
 import UIKit
 
 class Channel: NSObject {
-    let name: String
+    let channelName: String
     
-    init(name : String){
-        self.name = name
+    init(channelName : String){
+        self.channelName = channelName
     }
 }
