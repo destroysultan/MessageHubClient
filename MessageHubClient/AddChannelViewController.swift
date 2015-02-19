@@ -40,11 +40,59 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func submitChannelName(sender: AnyObject) {
         let channel = Channel(channelName: channelNameTextView.text)
+        
+        postNewChannel(channel)
+        
         self.delegate?.addChannelViewControllerDidCreateChannel(channel)
     }
     
-    
+    // throwns an error on screen
+    func alertWithError(error : NSError) {
+        let alertController = UIAlertController(
+            title: "Error",
+            message: error.description,
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
+    // POST Networking code
+    
+    func postNewChannel(newChannel: Channel) {
+        let session = NSURLSession.sharedSession()
+        
+        let request = NSMutableURLRequest()
+        request.HTTPMethod = "POST"
+        request.URL = NSURL(string: "http://tradecraftmessagehub.com/sample/\(newChannel.channelName)")
+        
+        var dataDictionary = ["user_name":"troy", "message_text":"new channel created!"] as Dictionary<String, String>
+        var err: NSError?
+        var requestBodyData = NSJSONSerialization.dataWithJSONObject(dataDictionary, options: nil, error: &err)
+        
+        request.HTTPBody = requestBodyData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+                if let error = error {
+                    self.alertWithError(error)
+                } else {
+                    println(response)
+                    println(data)
+                    // refresh channels list
+                    self.delegate?.addChannelViewControllerDidCreateChannel(newChannel)
+                }
+                
+
+            }
+        })
+        
+        task.resume()
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -57,6 +105,9 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
 
 }
 
+
+
+// Delegate
 
 protocol AddChannelViewControllerDelegate : NSObjectProtocol {
     func addChannelViewControllerDidCreateChannel(channel: Channel )

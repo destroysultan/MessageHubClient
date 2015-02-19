@@ -10,10 +10,8 @@ import UIKit
 
 class DetailViewController: UITableViewController {
 
-    var messages = [
-        Message(text: "hellohellohello", userName: "Troy"),
-        Message(text: "heyooo", userName: "John")
-    ]
+    var messages = [Message(text: "hellohellohello", userName: "Troy"), Message(text: "heyooo", userName: "John")]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +33,31 @@ class DetailViewController: UITableViewController {
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.text = "\(message.userName): \(message.text)"
         return cell
-    }   
+    }
     
+    
+//    // GET  messages
+//    
+//    func getMessages() {
+//        let session = NSURLSession.sharedSession()
+//        
+//        let request = NSMutableURLRequest()
+//        request.HTTPMethod = "GET"
+//        request.URL = NSURL(string: "http://tradecraftmessagehub.com/sample/")
+//        
+//        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+//            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+//                if let error = error {
+//                    self.alertWithError(error)
+//                } else if let channels = self.channelsFromNetworkResponseData(data) {
+//                    self.channels = channels
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        })
+//        
+//        task.resume()
+//    }
+//    
+//
 }

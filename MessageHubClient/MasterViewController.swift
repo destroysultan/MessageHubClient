@@ -10,7 +10,6 @@ import UIKit
 
 class MasterViewController: UITableViewController, AddChannelViewControllerDelegate {
 
-    var objects = [] as Array<Channel>
     var channels = [Channel(channelName: "Eng-track"), Channel(channelName: "Test-channel")]
 
 
@@ -35,7 +34,7 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMessageListViewController" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let object = objects[indexPath.row] as Channel
+                let object = channels[indexPath.row] as Channel
                 //TO-DO: provide appropriate data to DetailViewController
             }
         }
@@ -70,14 +69,15 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
     }
     
     func addChannelViewControllerDidCreateChannel(channel: Channel) {
-        objects.append(channel)
+        channels.append(channel)
         tableView.reloadData()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    // MARK: - Networking code
+    // MARK: - GET Networking code
     
+    // throwns an error on screen
     func alertWithError(error : NSError) {
         let alertController = UIAlertController(
             title: "Error",
@@ -87,26 +87,6 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func channelsFromNetworkResponseData(responseData : NSData) -> Array<Channel>? {
-        var serializationError : NSError?
-        let channelAPIDictionaries = NSJSONSerialization.JSONObjectWithData(
-            responseData,
-            options: nil,
-            error: &serializationError
-            ) as Array<Dictionary<String, String>>
-        
-        if let serializationError = serializationError {
-            alertWithError(serializationError)
-            return nil
-        }
-        
-        var channels = channelAPIDictionaries.map({ (channelAPIDictionary) -> Channel in
-            let channelToken = channelAPIDictionary["channel_token"]!
-            return Channel(channelName: channelToken)
-        })
-        
-        return channels
-    }
     
     // GET channels
     
@@ -130,5 +110,30 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
         
         task.resume()
     }
+    
+    // Parse channel name from network response json
+    
+    func channelsFromNetworkResponseData(responseData : NSData) -> Array<Channel>? {
+        var serializationError : NSError?
+        let channelAPIDictionaries = NSJSONSerialization.JSONObjectWithData(
+            responseData,
+            options: nil,
+            error: &serializationError
+            ) as Array<Dictionary<String, String>>
+        
+        if let serializationError = serializationError {
+            alertWithError(serializationError)
+            return nil
+        }
+        
+        var channels = channelAPIDictionaries.map({ (channelAPIDictionary) -> Channel in
+            let channelToken = channelAPIDictionary["channel_token"]!
+            return Channel(channelName: channelToken)
+        })
+        
+        return channels
+    }
+    
+
 }
 
