@@ -41,12 +41,17 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
     @IBAction func submitChannelName(sender: AnyObject) {
         let channel = Channel(channelName: channelNameTextView.text)
         
-        postNewChannel(channel)
-        
+        if channel == "" {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            postNewChannel(channel)
+        }
+    
         self.delegate?.addChannelViewControllerDidCreateChannel(channel)
     }
     
     // throwns an error on screen
+    
     func alertWithError(error : NSError) {
         let alertController = UIAlertController(
             title: "Error",
@@ -84,28 +89,12 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
                     // refresh channels list
                     self.delegate?.addChannelViewControllerDidCreateChannel(newChannel)
                 }
-                
-
             }
         })
         
         task.resume()
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
-
-
 
 // Delegate
 

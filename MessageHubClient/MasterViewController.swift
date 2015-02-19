@@ -4,7 +4,6 @@
 //
 //  Created by Troy Sultan on 2/12/15.
 //  Copyright (c) 2015 Troy Sultan. All rights reserved.
-//
 
 import UIKit
 
@@ -29,17 +28,17 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
     }
 
     // MARK: - Segues
-    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMessageListViewController" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let object = channels[indexPath.row] as Channel
+                let channelSelection = channels[indexPath.row] as Channel
                 //TO-DO: provide appropriate data to DetailViewController
+                let detailViewController = segue.destinationViewController as DetailViewController
+                detailViewController.channelName = channelSelection.channelName
             }
-        }
-        
-        else if segue.identifier == "showAddChannelViewController" {
+            
+        } else if segue.identifier == "showAddChannelViewController" {
             let addChannelViewController = segue.destinationViewController as AddChannelViewController
             addChannelViewController.delegate = self
         }
@@ -55,10 +54,6 @@ class MasterViewController: UITableViewController, AddChannelViewControllerDeleg
         return channels.count
     }
     
-//    // add channels created on phone tableView
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return objects.count
-//    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
