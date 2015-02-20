@@ -16,6 +16,9 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
     
     var placeholderLabel : UILabel!
     
+    //Create gray placeholder in textfield and keep cursor blinking at start of line (pulled from
+    //stackoverflow here: http://stackoverflow.com/questions/27652227/text-view-placeholder-swift)
+    
     override func viewDidLoad() {
         self.channelNameTextView.becomeFirstResponder()
         channelNameTextView.delegate = self
@@ -70,9 +73,9 @@ class AddChannelViewController: UIViewController, UITextViewDelegate {
         request.HTTPMethod = "POST"
         request.URL = NSURL(string: "http://tradecraftmessagehub.com/sample/\(newChannel.channelName)")
         
-        var dataDictionary = ["user_name":"troy", "message_text":"new channel created!"] as Dictionary<String, String>
+        var initialMessageDictionary = ["user_name":"troy", "message_text":"new channel created!"] as Dictionary<String, String>
         var err: NSError?
-        var requestBodyData = NSJSONSerialization.dataWithJSONObject(dataDictionary, options: nil, error: &err)
+        var requestBodyData = NSJSONSerialization.dataWithJSONObject(initialMessageDictionary, options: nil, error: &err)
         
         request.HTTPBody = requestBodyData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -12,7 +12,7 @@ class DetailViewController: UITableViewController {
     
     
     var channelName: String!
-    var messages = [Message(text: "hellohellohello", userName: "Troy"), Message(text: "heyooo", userName: "John")]
+    var messages = [] as Array<Message>
     
     
     override func viewDidLoad() {
